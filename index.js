@@ -15,7 +15,7 @@ const requestListener = function(req, res) {
   if (req.url === "/") {
     // check request url, if root, return html file
     // special variable __dirname has absolute path of where node code is running
-    fs.readFile( __dirname + "/page.html" )
+    fs.readFile( __dirname + "/horoscopes.html" )
       .then(
         contents => {
           // set http response header entry
@@ -28,7 +28,7 @@ const requestListener = function(req, res) {
       );
   } else {
     // if request url not root, return json file
-    fs.readFile(__dirname + "/data.json")
+    fs.readFile(__dirname + "/horoscopes.json")
       .then(contents => {
         // set http response header entry
         res.setHeader("Content-Type", "application/json; charset=UTF-8");
@@ -41,14 +41,14 @@ const requestListener = function(req, res) {
 };
 
 // create an http server instance
-const server = http.createServer(requestListener);
+const myserver = http.createServer(requestListener);
 
 // define the TCP port and IP address to tell our http server to listen to
-const host = "127.0.0.1"; // this IP address represents localhost
+const host = "127.0.0.1"; // this IP address represents localhost, my local computer
 const port = "3000"; // typical port for node.js
 
 // call the listen() method to start listening to http requests
-server.listen(
+myserver.listen(
   port,
   host,
   () => {
@@ -60,7 +60,7 @@ server.listen(
 
 // non-arrow function syntax of same code as lines 53-58 above
 /*
-server.listen(port, host, function() {
+myserver.listen(port, host, function() {
   console.log(`Server is running on http://${host}:${port}`);
 });
 */
